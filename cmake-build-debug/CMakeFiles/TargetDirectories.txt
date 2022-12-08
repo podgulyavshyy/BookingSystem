@@ -1,0 +1,3 @@
+/Users/mhunko/CLionProjects/BookingSystem/cmake-build-debug/CMakeFiles/BookingSystem.dir
+/Users/mhunko/CLionProjects/BookingSystem/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mhunko/CLionProjects/BookingSystem/cmake-build-debug/CMakeFiles/rebuild_cache.dir
