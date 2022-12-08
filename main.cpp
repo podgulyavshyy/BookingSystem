@@ -14,6 +14,7 @@ public:
         this->number = number;
         this->price = price;
     }
+
 };
 
 class Flight {
@@ -26,6 +27,18 @@ public:
         this->flightNo = flightNo;
         this->seats = seats;
     };
+
+    void listAvailableSeats(){
+        std::vector<Seat> availableSeats;
+        for (int i = 0; i < seats.size(); ++i) {
+            if(!seats[i].isBooked){
+                availableSeats.push_back(seats[i]);
+            }
+        }
+        for (int i = 0; i < availableSeats.size(); ++i) {
+            std::cout << availableSeats[i].number << " " << availableSeats[i].price << std::endl;
+        }
+    }
 };
 
 void tokenize(std::string const &str, const char* delim, std::vector<std::string> &out)
@@ -49,7 +62,7 @@ std::vector<Seat> seatDivider(std::string seats, std::string rows, std::string p
 
     tokenize(seats, "-", seatNumbersStartAndEnd);
 
-    for (int i = 0; i < seatNumbersStartAndEnd.capacity(); i++) {
+    for (int i = 0; i < seatNumbersStartAndEnd.capacity(); i++) { //mb change to size
         seatNumbersStartAndEndInt.push_back(std::stoi(seatNumbersStartAndEnd[i]));
     }
 
@@ -81,8 +94,38 @@ std::vector<Seat> seatDivider(std::string seats, std::string rows, std::string p
 
 
 
-int main() {
+void UI(std::vector<Flight> Flights) {
+    while(true){
+        std::string input;
+        std::cout << std::endl;
+        std::vector<std::string> inputVec;
+        std::getline(std::cin, input);
+        tokenize(input, " ", inputVec);
+        int command = std::stoi(inputVec[0]);// 1-check 2-book 3-return 4-view by id 5-view by user
 
+        if(command == 1){
+            std::string date = inputVec[1];
+            std::string flightNo = inputVec[2];
+            std::vector<Seat> placeholder;
+            // Flight FlightNeeded; = new Flight("placeholder", "placeholder", placeholder);
+            for (int i = 0; i < Flights.size(); ++i) {
+                if(Flights[i].flightNo == flightNo && Flights[i].date == date){
+                    Flights[i].listAvailableSeats();
+                }
+            }
+
+        }
+        if (command == 2){
+            std::string date = inputVec[1];
+            std::string flightNo = inputVec[2];
+            std::string seatNo = inputVec[3];
+            std::string username = inputVec[4];
+        }
+    }
+}
+
+
+int main() {
     std::fstream newFile;
     std::string filepath = "data.txt";
     newFile.open(filepath, std::ios::in);
@@ -108,7 +151,8 @@ int main() {
         }
         newFile.close();
     }
-    std::cout  << "Hello";
+    std::cout  << "Hello" << std::endl;
+    UI(Flights);
 
     return 0;
 }

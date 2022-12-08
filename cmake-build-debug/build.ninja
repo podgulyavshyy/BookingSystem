@@ -52,12 +52,6 @@ build CMakeFiles/BookingSystem.dir/main.cpp.o: CXX_COMPILER__BookingSystem_Debug
   OBJECT_DIR = CMakeFiles/BookingSystem.dir
   OBJECT_FILE_DIR = CMakeFiles/BookingSystem.dir
 
-build CMakeFiles/BookingSystem.dir/interface.cpp.o: CXX_COMPILER__BookingSystem_Debug /Users/mhunko/CLionProjects/BookingSystem/interface.cpp || cmake_object_order_depends_target_BookingSystem
-  DEP_FILE = CMakeFiles/BookingSystem.dir/interface.cpp.o.d
-  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -std=gnu++14
-  OBJECT_DIR = CMakeFiles/BookingSystem.dir
-  OBJECT_FILE_DIR = CMakeFiles/BookingSystem.dir
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target BookingSystem
@@ -66,7 +60,7 @@ build CMakeFiles/BookingSystem.dir/interface.cpp.o: CXX_COMPILER__BookingSystem_
 #############################################
 # Link the executable BookingSystem
 
-build BookingSystem: CXX_EXECUTABLE_LINKER__BookingSystem_Debug CMakeFiles/BookingSystem.dir/main.cpp.o CMakeFiles/BookingSystem.dir/interface.cpp.o
+build BookingSystem: CXX_EXECUTABLE_LINKER__BookingSystem_Debug CMakeFiles/BookingSystem.dir/main.cpp.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk
   OBJECT_DIR = CMakeFiles/BookingSystem.dir
   POST_BUILD = :
