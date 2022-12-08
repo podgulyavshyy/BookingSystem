@@ -1,9 +1,3 @@
 # ninja log v5
-1	4785	1670408023217834918	CMakeFiles/BookingSystem.dir/main.cpp.o	cd51adf3e50821b0
-4788	5062	1670408023523732521	BookingSystem	1b8bed9ecaa832a1
-3	4716	1670408228002070236	CMakeFiles/BookingSystem.dir/main.cpp.o	cd51adf3e50821b0
-4717	4992	1670408228301450874	BookingSystem	1b8bed9ecaa832a1
-3	2244	1670408277364427348	CMakeFiles/BookingSystem.dir/main.cpp.o	cd51adf3e50821b0
-2244	2409	1670408277542341076	BookingSystem	1b8bed9ecaa832a1
-5	3624	1670424965211160299	CMakeFiles/BookingSystem.dir/main.cpp.o	cd51adf3e50821b0
-3624	3864	1670424965470358892	BookingSystem	1b8bed9ecaa832a1
+2	5807	1670525838496391212	CMakeFiles/BookingSystem.dir/main.cpp.o	cd51adf3e50821b0
+5807	6228	1670525838964662958	BookingSystem	1b8bed9ecaa832a1
