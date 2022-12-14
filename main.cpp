@@ -3,16 +3,35 @@
 #include <string>
 #include <vector>
 
+int coreSeatID = 10000;
+
 class Seat {
 public:
     std::string number;
     std::string price;
-    std::string name = "blank";
+    std::string name;
     int id;
     bool isBooked;
-    Seat(std::string number, std::string price) {
+    Seat(std::string number, std::string price, int id) {
         this->number = number;
         this->price = price;
+        this->id = id;
+        this->name = "blank";
+        this->isBooked = false;
+
+    }
+
+    void bookSeat(std::string iname){
+        this->name = iname;
+        this->isBooked = true;
+        std::cout <<  "Your seat was booked with id of " << this->id << std::endl;
+        std::cout <<  "Your seat was booked with name of " << this->name << std::endl;
+    }
+
+    void unbookSeat(){
+        std::cout <<  "Confirmed " << this->price << " refund for " << this->name << std::endl;
+        this->name = "blank";
+        this->isBooked = false;
     }
 
 };
@@ -28,6 +47,7 @@ public:
         this->seats = seats;
     };
 
+
     void listAvailableSeats(){
         std::vector<Seat> availableSeats;
         for (int i = 0; i < seats.size(); ++i) {
@@ -39,6 +59,31 @@ public:
             std::cout << availableSeats[i].number << " " << availableSeats[i].price << std::endl;
         }
     }
+
+    Seat& findSeatByNo(std::string number){
+        for (int i = 0; i < seats.size(); ++i) {
+            if (seats[i].number == number){
+                return seats[i];
+            }
+        }
+    }
+
+    Seat& findSeatById(int ID){
+        for (int i = 0; i < seats.size(); ++i) {
+            if (seats[i].id == ID){
+                return seats[i];
+            }
+        }
+    }
+
+    void findSeatByIdAndInfo(int ID){
+        for (int i = 0; i < seats.size(); ++i) {
+            if (seats[i].id == ID){
+                std::cout << "Flight " << this->flightNo << " " << this->date << " seat " << seats[i].number << " price " << seats[i].price << " " << seats[i].name << std::endl;
+            }
+        }
+    }
+
 };
 
 void tokenize(std::string const &str, const char* delim, std::vector<std::string> &out)
@@ -86,7 +131,8 @@ std::vector<Seat> seatDivider(std::string seats, std::string rows, std::string p
         }
     }
     for (int i = 0; i < seatNumbers.size(); i++) {
-        seatsFinal.push_back(Seat(seatNumbers[i], price));
+        coreSeatID++;
+        seatsFinal.push_back(Seat(seatNumbers[i], price, coreSeatID));
     }
 
     return seatsFinal;
@@ -94,7 +140,7 @@ std::vector<Seat> seatDivider(std::string seats, std::string rows, std::string p
 
 
 
-void UI(std::vector<Flight> Flights) {
+void UI(std::vector<Flight>& Flights) {
     while(true){
         std::string input;
         std::cout << std::endl;
@@ -120,7 +166,35 @@ void UI(std::vector<Flight> Flights) {
             std::string flightNo = inputVec[2];
             std::string seatNo = inputVec[3];
             std::string username = inputVec[4];
+            for (int i = 0; i < Flights.size(); ++i) {
+                if(Flights[i].flightNo == flightNo && Flights[i].date == date){
+                    Seat& test = Flights[i].findSeatByNo(seatNo);
+                    test.bookSeat(username);
+                }
+            }
         }
+        if (command == 3){
+            int id = std::stoi(inputVec[1]);
+            for (int j = 0; j < Flights.size(); ++j) {
+                for (int i = 0; i < Flights[j].seats.size(); ++i) {
+                    if(Flights[j].seats[i].id == id){
+                        Flights[j].findSeatById(id).unbookSeat();
+                    }
+                }
+            }
+        }
+
+        if (command == 4){
+            int id = std::stoi(inputVec[1]);
+            for (int j = 0; j < Flights.size(); ++j) {
+                for (int i = 0; i < Flights[j].seats.size(); ++i) {
+                    if(Flights[j].seats[i].id == id){
+                        Flights[j].findSeatByIdAndInfo(id);
+                    }
+                }
+            }
+        }
+
     }
 }
 
@@ -129,6 +203,7 @@ int main() {
     std::fstream newFile;
     std::string filepath = "data.txt";
     newFile.open(filepath, std::ios::in);
+
     // std::vector<std::string> out;
     std::vector<Flight> Flights;
     if (newFile.is_open()){
@@ -144,7 +219,7 @@ int main() {
             std::vector<Seat> seatsTwo = seatDivider(out[5], out[2], out[6]);
             //std::vector<Seat> seatsConcatted;
 
-            seatsOne.insert( seatsOne.end(), seatsTwo.begin(), seatsTwo.end() );
+            seatsOne.insert( seatsOne.end(), seatsTwo.begin(), seatsTwo.end());
 
             Flight* Flight1 = new Flight(out[0], out[1], seatsOne);
             Flights.push_back(*Flight1);
