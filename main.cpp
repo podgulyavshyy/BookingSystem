@@ -84,6 +84,13 @@ public:
         }
     }
 
+    void findSeatByName(std::string name){
+        for (int i = 0; i < seats.size(); ++i) {
+            if (seats[i].name == name){
+                std::cout << "Flight " << this->flightNo << " " << this->date << " seat " << seats[i].number << " price " << seats[i].price << " " << seats[i].name << std::endl;
+            }
+        }
+    }
 };
 
 void tokenize(std::string const &str, const char* delim, std::vector<std::string> &out)
@@ -190,6 +197,16 @@ void UI(std::vector<Flight>& Flights) {
                 for (int i = 0; i < Flights[j].seats.size(); ++i) {
                     if(Flights[j].seats[i].id == id){
                         Flights[j].findSeatByIdAndInfo(id);
+                    }
+                }
+            }
+        }
+        if (command == 5){
+            std::string name = inputVec[1];
+            for (int j = 0; j < Flights.size(); ++j) {
+                for (int i = 0; i < Flights[j].seats.size(); ++i) {
+                    if(Flights[j].seats[i].name == name){
+                        Flights[j].findSeatByName(name);
                     }
                 }
             }
